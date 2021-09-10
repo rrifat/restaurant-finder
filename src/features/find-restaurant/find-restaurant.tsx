@@ -1,4 +1,5 @@
 import { Col, Row } from "antd";
+import ErrorBoundary from "components/error-boundary";
 import Map from "components/map";
 import SearchBar from "components/search-bar";
 import "./find-restaurant.css";
@@ -13,8 +14,10 @@ function FindRestaurant() {
           </div>
         </div>
       </Col>
-      <Col span={24} style={{ marginTop: "5px" }}>
-        <Map />
+      <Col span={24} style={{ border: "5px solid gray" }}>
+        <ErrorBoundary>
+          <Map />
+        </ErrorBoundary>
       </Col>
     </Row>
   );
