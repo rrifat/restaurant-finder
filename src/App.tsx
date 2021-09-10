@@ -1,5 +1,7 @@
+import FindRestaurant from "features/find-restaurant/find-restaurant";
+
 function App() {
-  return <div>Restaurant Finder</div>;
+  return <FindRestaurant />;
 }
 
 export default App;
