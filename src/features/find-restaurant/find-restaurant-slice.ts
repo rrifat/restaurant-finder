@@ -6,12 +6,13 @@ interface State {
   location: {
     lat: number;
     lng: number;
+    name: string;
   };
 }
 
 const initialState: State = {
   venues: [],
-  location: { lat: 23.7815222, lng: 90.4004866 },
+  location: { lat: 23.7815222, lng: 90.4004866, name: "Monstarlab Bangladesh" },
 };
 
 const findRestaurantSlice = createSlice({
@@ -23,7 +24,10 @@ const findRestaurantSlice = createSlice({
       // immutable under the hood
       state.venues = action.payload;
     },
-    setLocation(state, action: PayloadAction<{ lat: number; lng: number }>) {
+    setLocation(
+      state,
+      action: PayloadAction<{ lat: number; lng: number; name: string }>
+    ) {
       // it's ok to do because immer makes it
       // immutable under the hood
       state.location = action.payload;

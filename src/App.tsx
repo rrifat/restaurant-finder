@@ -19,8 +19,9 @@ function App() {
         const { venues } = data.response;
         const {
           location: { lat, lng },
+          name,
         } = getRandomVenueInThreeKm(venues);
-        dispatch(setLocation({ lat, lng }));
+        dispatch(setLocation({ lat, lng, name }));
       })
       .catch((err) => {
         message.error(

@@ -37,7 +37,7 @@ function SearchBar() {
 
   const onSelect = (value: string, option: any) => {
     const { lat, lng } = option;
-    dispatch(setLocation({ lat, lng }));
+    dispatch(setLocation({ lat, lng, name: value }));
   };
 
   return (

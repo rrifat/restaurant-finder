@@ -5,7 +5,9 @@ import { useMount } from "utils/hooks";
 function Map() {
   const divRef = React.useRef<HTMLDivElement>(null);
   const hasMounted = useMount();
-  const { lat, lng } = useAppSelector((state) => state.findRestaurant.location);
+  const { lat, lng, name } = useAppSelector(
+    (state) => state.findRestaurant.location
+  );
 
   React.useEffect(() => {
     const initMap = () => {
@@ -22,11 +24,84 @@ function Map() {
         position: map.getCenter(),
       });
       marker.setMap(map);
+
+      const infowindow = new google.maps.InfoWindow();
+      const service = new google.maps.places.PlacesService(map);
+      const searchRequest = {
+        location: new google.maps.LatLng(23.7815222, 90.4004866),
+        query: name,
+        radius: 3000,
+        type: "restaurant",
+      };
+
+      service.textSearch(searchRequest, (results, status) => {
+        if (
+          status !== google.maps.places.PlacesServiceStatus.OK ||
+          results === null
+        ) {
+          return;
+        }
+        console.log(name);
+        const result = results.filter((r) => r.name?.includes(name))[0];
+
+        const detailsRequest = {
+          placeId: result?.place_id ?? "ChIJhZiGChHHVTcRhRkX3Sj5juU",
+        };
+        service.getDetails(detailsRequest, (place, status) => {
+          if (
+            status !== google.maps.places.PlacesServiceStatus.OK ||
+            place === null
+          ) {
+            return;
+          }
+          marker.addListener("mouseover", () => {
+            const {
+              rating,
+              user_ratings_total,
+              opening_hours,
+              name,
+              formatted_address,
+              formatted_phone_number,
+            } = place;
+
+            const placeRating = rating ?? 0;
+            const userRatingsTotal = user_ratings_total ?? 0;
+            const ratingContent = `Rating: ${placeRating} (${userRatingsTotal})`;
+            const isOpenText = opening_hours?.isOpen()
+              ? "Open Now"
+              : "Close Now";
+
+            const content = document.createElement("div");
+
+            content.appendChild(createElement("h2", name));
+            content.appendChild(createElement("p", ratingContent));
+            content.appendChild(
+              createElement("p", `Address: ${formatted_address}`)
+            );
+            content.appendChild(
+              createElement("p", `Phone: ${formatted_phone_number}`)
+            );
+            content.appendChild(createElement("p", isOpenText));
+
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          });
+          marker.addListener("mouseout", function () {
+            infowindow.close();
+          });
+        });
+      });
     };
     hasMounted && initMap();
-  }, [hasMounted, lat, lng]);
+  }, [hasMounted, lat, lng, name]);
 
-  return <div id="map" ref={divRef} style={{ height: "58vh" }}></div>;
+  return <div id="map" ref={divRef} style={{ height: "58vh" }} />;
 }
+
+const createElement = (tag: string, txtContent = "") => {
+  const element = document.createElement(tag);
+  element.textContent = txtContent;
+  return element;
+};
 
 export default Map;
