@@ -1,8 +1,4 @@
-export function Error({
-  message = "Somthing went wrong...",
-}: {
-  message?: string;
-}) {
+export function Error({ message = "Somthing went wrong..." }) {
   return (
     <div
       style={{

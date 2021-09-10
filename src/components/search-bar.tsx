@@ -5,7 +5,10 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useDebounce } from "utils/hooks";
 import { getVenues } from "requests";
 import { Venue } from "models";
-import { setVenues } from "features/find-restaurant/find-restaurant-slice";
+import {
+  setLocation,
+  setVenues,
+} from "features/find-restaurant/find-restaurant-slice";
 
 function SearchBar() {
   const dispatch = useAppDispatch();
@@ -32,12 +35,18 @@ function SearchBar() {
     setQuery(value);
   };
 
+  const onSelect = (value: string, option: any) => {
+    const { lat, lng } = option;
+    dispatch(setLocation({ lat, lng }));
+  };
+
   return (
     <>
       <AutoComplete
         dropdownMatchSelectWidth={252}
         style={{ width: "100%" }}
         options={options}
+        onSelect={onSelect}
         onSearch={handleSearch}
       >
         <Input
@@ -55,6 +64,8 @@ function SearchBar() {
 function viewSearchResult(venues: Venue[]) {
   return venues.map((v) => ({
     value: v.name,
+    lat: v.location.lat,
+    lng: v.location.lng,
     label: (
       <div
         style={{

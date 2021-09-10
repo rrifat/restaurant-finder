@@ -23,9 +23,14 @@ const findRestaurantSlice = createSlice({
       // immutable under the hood
       state.venues = action.payload;
     },
+    setLocation(state, action: PayloadAction<{ lat: number; lng: number }>) {
+      // it's ok to do because immer makes it
+      // immutable under the hood
+      state.location = action.payload;
+    },
   },
 });
 
-export const { setVenues } = findRestaurantSlice.actions;
+export const { setVenues, setLocation } = findRestaurantSlice.actions;
 
 export default findRestaurantSlice.reducer;

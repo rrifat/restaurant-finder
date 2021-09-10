@@ -14,7 +14,7 @@ function FindRestaurant() {
           </div>
         </div>
       </Col>
-      <Col span={24} style={{ border: "5px solid gray" }}>
+      <Col span={24} style={{ border: "1px solid gray" }}>
         <ErrorBoundary>
           <Map />
         </ErrorBoundary>
