@@ -1,4 +1,5 @@
 import { Col, Row } from "antd";
+import Map from "components/map";
 import SearchBar from "components/search-bar";
 import "./find-restaurant.css";
 
@@ -11,6 +12,9 @@ function FindRestaurant() {
             <SearchBar />
           </div>
         </div>
+      </Col>
+      <Col span={24} style={{ marginTop: "5px" }}>
+        <Map />
       </Col>
     </Row>
   );

@@ -1,5 +1,16 @@
 import React from "react";
 
+function useMount() {
+  const [isMount, setMount] = React.useState(false);
+  React.useEffect(() => {
+    setMount(true);
+    return () => {
+      setMount(false);
+    };
+  }, []);
+  return isMount;
+}
+
 function useDebounce<T>(value: T, delay?: number): T {
   const [debouncedValue, setDebouncedValue] = React.useState<T>(value);
 
@@ -14,4 +25,4 @@ function useDebounce<T>(value: T, delay?: number): T {
   return debouncedValue;
 }
 
-export { useDebounce };
+export { useMount, useDebounce };

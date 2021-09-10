@@ -3,10 +3,15 @@ import { SearchResultView } from "components/search-bar";
 
 interface State {
   venues: SearchResultView;
+  location: {
+    lat: number;
+    lng: number;
+  };
 }
 
 const initialState: State = {
   venues: [],
+  location: { lat: 23.7815222, lng: 90.4004866 },
 };
 
 const findRestaurantSlice = createSlice({

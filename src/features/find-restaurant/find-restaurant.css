@@ -1,9 +1,9 @@
 .background {
   background-image: url("../../images/02.jpg");
+  height: 40vh;
   position: relative;
   background-size: cover;
   background-position: center;
-  padding: 150px;
 }
 .search-bar {
   position: absolute;
