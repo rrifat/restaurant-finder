@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResultView } from "components/search-bar";
+import { DEFAULT_LAT, DEFAULT_LNG } from "app-constants";
 
 interface State {
   venues: SearchResultView;
@@ -12,7 +13,11 @@ interface State {
 
 const initialState: State = {
   venues: [],
-  location: { lat: 23.7815222, lng: 90.4004866, name: "Monstarlab Bangladesh" },
+  location: {
+    lat: DEFAULT_LAT,
+    lng: DEFAULT_LNG,
+    name: "Monstarlab Bangladesh",
+  },
 };
 
 const findRestaurantSlice = createSlice({

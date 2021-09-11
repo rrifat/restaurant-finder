@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppSelector } from "store/hooks";
 import { useMount } from "utils/hooks";
+import { DEFAULT_LAT, DEFAULT_LNG } from "app-constants";
 
 function Map() {
   const divRef = React.useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ function Map() {
       const infowindow = new google.maps.InfoWindow();
       const service = new google.maps.places.PlacesService(map);
       const searchRequest = {
-        location: new google.maps.LatLng(23.7815222, 90.4004866),
+        location: new google.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG),
         query: name,
         radius: 3000,
         type: "restaurant",
@@ -41,9 +42,7 @@ function Map() {
         ) {
           return;
         }
-        console.log(name);
         const result = results.filter((r) => r.name?.includes(name))[0];
-
         const detailsRequest = {
           placeId: result?.place_id ?? "ChIJhZiGChHHVTcRhRkX3Sj5juU",
         };
