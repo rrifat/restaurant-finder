@@ -9,6 +9,7 @@ function FindRestaurant() {
     <Row>
       <Col span={24}>
         <div className="background">
+          <h1 className="title">Restaurant Finder</h1>
           <div className="search-bar">
             <SearchBar />
           </div>
