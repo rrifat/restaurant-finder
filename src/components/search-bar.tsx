@@ -9,6 +9,7 @@ import {
   setLocation,
   setVenues,
 } from "features/find-restaurant/find-restaurant-slice";
+import { AxiosError } from "axios";
 
 function SearchBar() {
   const dispatch = useAppDispatch();
@@ -24,10 +25,8 @@ function SearchBar() {
           : [];
         dispatch(setVenues(payload));
       })
-      .catch((err) => {
-        message.error(
-          err.response.data.meta.errorDetail || "Oops! Something went wrong"
-        );
+      .catch((err: AxiosError) => {
+        message.error(err.response?.data?.meta?.errorDetail || err.message);
       });
   }, [debouncedQuery, dispatch]);
 

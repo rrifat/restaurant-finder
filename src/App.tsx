@@ -5,6 +5,7 @@ import { getVenues } from "requests";
 import { useAppDispatch } from "store/hooks";
 import { FullPageOutlinedLoader } from "components/loader";
 import { Venue } from "models";
+import { AxiosError } from "axios";
 
 const FindRestaurant = React.lazy(
   () => import("features/find-restaurant/find-restaurant")
@@ -23,10 +24,8 @@ function App() {
         } = getRandomVenueInThreeKm(venues);
         dispatch(setLocation({ lat, lng, name }));
       })
-      .catch((err) => {
-        message.error(
-          err.response.data.meta.errorDetail || "Oops! Something went wrong"
-        );
+      .catch((err: AxiosError) => {
+        message.error(err.response?.data?.meta?.errorDetail || err.message);
       });
   }, [dispatch]);
 
