@@ -39,7 +39,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-##Reasoning Behind Technical Choices
+## Reasoning Behind Technical Choices
 As I have to use React and Redux, Typescript, and Ant Design as per instructions, I don't find it necessary to use many other tools to build this app.
 
 I've used `axios` to make HTTP requests over the `fetch`. The reasons behind this are,
@@ -55,7 +55,7 @@ I've not used standard `redux` here. I've used `@reduxjs/toolkit` and `react-red
 - It makes it easier to write redux applications by allowing some options to configure global stores, create both actions and reducers more elegantly by abstracting the Redux API as much as possible.
 - This is also the redux team's official approach to write redux logic
 
-##Reasoning Behind Architectural Choices
+## Reasoning Behind Architectural Choices
 As it is a very simple app and, I try to make it as simple as possible. 
 I've divided this app into two main components: Search Bar and Map. 
 And wrap those components by a parent component FindRestaurant. 
@@ -67,7 +67,7 @@ There is a component folder. Here I put some reusable components.
 I can also split into common components and feature based components 
 when the project grows. I find this approach pretty flexible to structure my app.
 
-##Trade Offs Might Have Been Made
+## Trade Offs Might Have Been Made
 In this project I could’ve used `react-query` for data fetching, updating and caching. 
 As this project has only a couple of http calls, no api for data updating and no need for caching 
 at this stage so I don’t add any extra library to solve this purpose. But for any 
@@ -84,7 +84,7 @@ details I find it is a component written over a small set of the
 Google map api. So I had to go through the details to find out what are they providing 
 and which on do I need. On the other hand I find things very easily from Google map javascript api which I required.
 
-##Things Could've Been Different
+## Things Could've Been Different
 If I could’ve spent more time on this project I would've thought about the map component.
 As an alternative, I would've tried to write the component in more of a "React Way" and focus more on testing.
 I would've added some information on Google map. Like the direction between places.
